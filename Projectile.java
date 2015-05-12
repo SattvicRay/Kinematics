@@ -1,4 +1,4 @@
-package Kinematics-master;
+package Kinematics;
 
 import java.text.DecimalFormat;
 
