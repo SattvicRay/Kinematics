@@ -1,4 +1,4 @@
-package Kinematics-master;
+package Kinematics;
 
 import javax.swing.*;
 import java.awt.*;
