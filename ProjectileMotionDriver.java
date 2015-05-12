@@ -27,8 +27,8 @@ public class ProjectileMotionDriver
 	
 	public static void main (String[] args)
 	{
-		Level1(Math.PI/4);
-		//Level2(Math.PI/4);
+		//Level1(Math.PI/4);
+		Level2(Math.PI/4);
 		//Level3(Air.NOAIR);
 		//Level3(Air.AIR);
 		//Challenge();
@@ -45,7 +45,7 @@ public class ProjectileMotionDriver
 		double initVelocity = 10;
 		System.out.println("initial velocity? (m/s)");
 		initVelocity = Double.parseDouble(scan.nextLine());
-		System.out.println("angel with ground? (radians)");
+		System.out.println("angle with ground? (radians)");
 		theta = Double.parseDouble(scan.nextLine());
 		projectile = new Projectile(new Vector(0,0,0), 
 				new Vector(initVelocity*Math.cos(theta),0,initVelocity*Math.sin(theta)), 
@@ -58,15 +58,25 @@ public class ProjectileMotionDriver
 	
 	public static void Level2(double angleWithHoriz)
 	{
+		System.out.println("Welcome to the kinematics simulation. Kinematics is simulated in 3 dimensions with gravity and air resistance");
+		Scanner scan = new Scanner(System.in);
+		double theta = 0;
 		double initVelocity = 10;
+		double airRes = airResistConst;
+		System.out.println("initial velocity? (m/s) A good value is 10");
+		initVelocity = Double.parseDouble(scan.nextLine());
+		System.out.println("angle with ground? (radians) A good value is 0.75");
+		theta = Double.parseDouble(scan.nextLine());
+		System.out.println("air resistance constant? (kg/m) A good value is 5");
+		airRes = Double.parseDouble(scan.nextLine());
+		
 		projectile = new Projectile(new Vector(0,0,0), 
-				new Vector(initVelocity*Math.cos(angleWithHoriz),0,initVelocity*Math.sin(angleWithHoriz)), 
+				new Vector(initVelocity*Math.cos(theta),0,initVelocity*Math.sin(theta)), 
 				new Vector(0,0,0), mass);
-		force = new Force(gForce,airResistConst,0);
+		force = new Force(gForce,airRes,0);
 		force.setGravity(projectile.getMass(), new Vector(0, 0, -1));
 		world = new World(projectile, force, totalTime, increment);
 		world.extrapolate(World.Print.PRINT, World.Terminate.ABOVEGROUND);
-		
 	}
 
 	public static void Level3(Air type)
