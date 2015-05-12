@@ -1,4 +1,4 @@
-package kinematics_v2;
+package Kinematics-master;
 import java.awt.Dimension;
 import java.text.DecimalFormat;
 
