@@ -1,4 +1,5 @@
 package kinematics_v2;
+import java.awt.Dimension;
 import java.text.DecimalFormat;
 
 /**
@@ -12,7 +13,9 @@ public class World
 	private Force force;
 	private double totalTime;
 	private double increment;
-	DecimalFormat df;
+	private DecimalFormat df;
+	private Canvas canvasPos;
+	private Canvas canvasVel;
 	
 	/**
 	 * 
@@ -23,6 +26,10 @@ public class World
 	 */
 	public World(Projectile projectile, Force force, double totalTime, double increment)
 	{
+		canvasPos = new Canvas("z-position vs x-position");
+		canvasPos.setVisible(true);
+		canvasVel = new Canvas("velocity vs time");
+		canvasVel.setVisible(true);
 		this.projectile = projectile;
 		this.force = force;
 		this.totalTime = totalTime;
@@ -39,6 +46,9 @@ public class World
 	 */
 	public void extrapolate(Print print, Terminate above)
 	{
+		Dimension d = canvasPos.getSize();
+		double zMax = d.getHeight();
+		
 		double elapsedTime = 0;
 		if (print == Print.PRINT)
 		{
@@ -56,6 +66,20 @@ public class World
 			force.setAirResistance(projectile.getVelocity());
 			force.setSpring(projectile.getPosition());
 			force.setMagnetic(10, projectile.getVelocity(), new Vector(0,0.0,0));
+			
+			
+			canvasPos.drawLine((int)(projectile.getPosition().getX()*75), (int)(zMax-projectile.getPosition().getZ()*75), 
+					(int)(projectile.getPosition().getX()*75+1), (int)(zMax-projectile.getPosition().getZ()*75+1));
+			
+			canvasVel.drawLine((int)(elapsedTime*75), (int)(zMax-projectile.getVelocity().getZ()*75), 
+					(int)(elapsedTime*75+1), (int)(zMax-projectile.getVelocity().getZ()*75+1));
+
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			if (force.hasTension())
 			{
