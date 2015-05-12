@@ -1,4 +1,4 @@
-package kinematics_v2;
+package Kinematics-master;
 
 public class Force {
 		private Vector gravity;
