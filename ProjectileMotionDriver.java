@@ -32,8 +32,8 @@ public class ProjectileMotionDriver
 		System.out.println("Welcome to the kinematics simulation. Kinematics is simulated in 3 dimensions with gravity and air resistance");
 		Scanner scan = new Scanner(System.in);
 		double theta = 0;
-		double initVelocity = 10;
-		double airRes = airResistConst;
+		double initVelocity = 0;
+		double airRes = 0;
 		System.out.println("initial velocity? (m/s) A good value is 10");
 		initVelocity = Double.parseDouble(scan.nextLine());
 		System.out.println("angle with ground? (radians) A good value is 0.75");
